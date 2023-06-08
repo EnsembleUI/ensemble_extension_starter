@@ -1,0 +1,43 @@
+View:
+  # Optional - style the screen
+  styles:
+    scrollableView: true
+
+  # Optional - set the header for the screen
+  header:
+    title: Safari Extension
+
+  # Specify the body of the screen
+  body:
+    Column:
+      styles:
+        padding: 24
+        gap: 20
+      children:
+        - Text:
+            styles: { fontSize: 30, fontWeight: bold }
+            id: wordReplacementId
+            text: You've replaced 0 words
+        - Divider
+        - Text:
+            text: "Store Value the value in Get Storage from UserDefaults(suite: appGroupWithBundleId)"
+        - Button:
+            label: "Refresh"
+            onTap:
+              ensembleExtension:
+        - Text:
+            text: "Get value from the Get Storage"
+        - Button:
+            label: Get Value
+            onTap:
+              executeCode:
+                body: |-
+                  //@code
+                  wordReplacementId.text = getExtensionValue();
+
+Global: |-
+
+  function getExtensionValue() {
+    var wordReplacement = ensemble.storage.get('WordReplacementData');
+    return wordReplacement;
+  }
