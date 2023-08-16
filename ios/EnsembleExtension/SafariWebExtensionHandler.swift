@@ -10,6 +10,8 @@ import os.log
 
 // Communicates with the extension running in Safari.
 class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
+    
+    static let groupId: String = "group.com.example.ensembleExtensionStarter"
 
     func beginRequest(with context: NSExtensionContext) {
         // Unpack the message from Safari Web Extension.
@@ -17,13 +19,12 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
         let message = item.userInfo?[SFExtensionMessageKey]
         os_log(.default, "Received message from browser.runtime.sendNativeMessage: %@", message as! CVarArg)
 
-        // Update the value in UserDefaults.
-        let defaults = UserDefaults(suiteName: "group.com.example.ensembleExtensionStarter")
         let messageDictionary = message as? [String: String]
-        if messageDictionary?["message"] == "Word replaced" {
-            var currentValue = defaults?.integer(forKey: "WordReplacementCount") ?? 0
-            currentValue += 1
-            defaults?.set(currentValue, forKey: "WordReplacementCount")
+        // Keychain
+        if messageDictionary?["message"] == "tokenExchange" {
+            // Read Token from Keychain
+            let value = KeychainService().read(key: "authToken", groupId: SafariWebExtensionHandler.groupId, accountName: nil, synchronizable: nil)
+            print("AuthToken value: \(value)")
         }
 
         let response = NSExtensionItem()

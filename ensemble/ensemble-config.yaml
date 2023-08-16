@@ -10,7 +10,7 @@ definitions:
     # appId represents an App, and is a folder under the root directory
     # Note that each App directory also has to be added manually under pubspec.yaml
     appId: helloApp
-    appHome: SafariExtensionApp
+    appHome: SafariExtensionApp2
 
     #folder that contains the translated strings for all locales
     i18nPath: ensemble/i18n

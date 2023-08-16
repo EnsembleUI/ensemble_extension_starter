@@ -39,7 +39,7 @@ dependencies:
   ensemble:
     git:
       url: https://github.com/EnsembleUI/ensemble.git
-      ref: ios-extension
+      ref: main
 
 dev_dependencies:
   flutter_test:

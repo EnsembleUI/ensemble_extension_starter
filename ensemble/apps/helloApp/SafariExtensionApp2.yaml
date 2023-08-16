@@ -1,0 +1,27 @@
+View:
+  header:
+    title: Secure Storage
+  styles:
+    scrollableView: true
+    backgroundColor: white
+  Column:
+    mainAxis: center
+    crossAxis: center
+    styles:
+      padding: 20
+      gap: 20
+    children:
+      - TextInput:
+          label: Enter your key
+          id: textInputKeyId
+      - TextInput:
+          label: Enter your value
+          id: textInputValueId
+      - Button:
+          label: Store Token
+          onTap:
+            executeCode:
+              body: |
+                //@code
+                console.log("Store Token called");
+                ensemble.saveToKeychain(textInputKeyId.value, textInputValueId.value);
